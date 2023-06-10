@@ -1,0 +1,88 @@
+// Number System (Decimal to Binary , binary to Decimal , Decimal to Octal , Decimal to Hexa , Hexa to Binary) - Recursion
+
+import java.util.Scanner;
+
+public class NumberSystemConverter {
+
+    // Decimal to Binary
+    public static String decimalToBinary(int decimal) {
+        if (decimal == 0) {
+            return "";
+        } else {
+            int remainder = decimal % 2;
+            int quotient = decimal / 2;
+            return decimalToBinary(quotient) + String.valueOf(remainder);
+        }
+    }
+
+    // Binary to Decimal
+    public static int binaryToDecimal(String binary, int index) {
+        if (index < 0) {
+            return 0;
+        } else {
+            int lastDigit = binary.charAt(index) - '0';
+            return (lastDigit * (int) Math.pow(2, binary.length() - 1 - index)) + binaryToDecimal(binary, index - 1);
+        }
+    }
+
+    // Decimal to Octal
+    public static String decimalToOctal(int decimal) {
+        if (decimal == 0) {
+            return "";
+        } else {
+            int remainder = decimal % 8;
+            int quotient = decimal / 8;
+            return decimalToOctal(quotient) + String.valueOf(remainder);
+        }
+    }
+
+    // Decimal to Hexadecimal
+    public static String decimalToHexadecimal(int decimal) {
+        if (decimal == 0) {
+            return "";
+        } else {
+            int remainder = decimal % 16;
+            int quotient = decimal / 16;
+            String hexDigit;
+            if (remainder < 10) {
+                hexDigit = String.valueOf(remainder);
+            } else {
+                hexDigit = String.valueOf((char) ('A' + remainder - 10));
+            }
+            return decimalToHexadecimal(quotient) + hexDigit;
+        }
+    }
+
+    // Hexadecimal to Binary
+    public static String hexadecimalToBinary(String hexadecimal, int index) {
+        if (index < 0) {
+            return "";
+        } else {
+            char hexChar = hexadecimal.charAt(index);
+            int decimal = Character.digit(hexChar, 16);
+            String binaryDigit = decimalToBinary(decimal);
+            return hexadecimalToBinary(hexadecimal, index - 1) + binaryDigit;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a decimal number: ");
+        int decimal = scanner.nextInt();
+
+        System.out.println("Binary: " + decimalToBinary(decimal));
+
+        System.out.print("Enter a binary number: ");
+        String binary = scanner.next();
+        System.out.println("Decimal from Binary: " + binaryToDecimal(binary, binary.length() - 1));
+
+        System.out.println("Octal: " + decimalToOctal(decimal));
+        System.out.println("Hexadecimal: " + decimalToHexadecimal(decimal));
+
+        System.out.print("Enter a hexadecimal number: ");
+        String hexadecimal = scanner.next();
+        System.out.println("Binary from Hexadecimal: " + hexadecimalToBinary(hexadecimal, hexadecimal.length() - 1));
+        scanner.close();
+    }
+}
