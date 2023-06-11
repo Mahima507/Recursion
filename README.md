@@ -1,3 +1,4 @@
 # Recursion
-Recurison Patterns Problems
-Recursion Assignment 
+1. Recurison Patterns Problems.
+
+2. Recursion Assignment. 
