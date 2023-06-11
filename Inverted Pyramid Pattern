@@ -1,0 +1,51 @@
+/*    
+Inverted Pyramid Pattern
+ 
+ * * * * * *
+  * * * * *
+   * * * *
+    * * *
+     * *
+      *
+  
+ */
+
+
+public class InvertedPyramidPattern {
+
+    public static void printPattern(int n, int spaces) {
+        if (n <= 0) {
+            return;
+        } else {
+            printSpaces(spaces);
+            printStars(n);
+            System.out.println();
+            printPattern(n - 1, spaces + 1);
+        }
+    }
+
+    public static void printSpaces(int count) {
+        if (count <= 0) {
+            return;
+        } else {
+            System.out.print(" ");
+            printSpaces(count - 1);
+        }
+    }
+
+    public static void printStars(int count) {
+        if (count <= 0) {
+            return;
+        } else {
+            System.out.print(" *");
+            printStars(count - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 6; // Number of rows
+        int spaces = 0; // Initial number of spaces
+
+        printPattern(n, spaces);
+    }
+}
